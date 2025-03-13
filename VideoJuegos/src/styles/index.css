@@ -1,0 +1,114 @@
+/* Estilo global y fondo */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    color: #333;
+  }
+  
+  /* Header profesional */
+  .header {
+    text-align: center;
+    padding: 20px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+  
+  /* Estilo para el buscador */
+  .search-bar {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 1rem;
+    display: block;
+    margin: 0 auto 20px auto;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .search-bar:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  
+  /* Estilos para el contenedor de filtros (si usas inputs y selects) */
+  .filters-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .filters-container input,
+  .filters-container select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .filters-container input:focus,
+  .filters-container select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+/* Contenedor que mostrará 2 columnas y filas de 50vh cada una */
+.grid-container {
+    display: grid;
+    /* 2 columnas fijas */
+    grid-template-columns: repeat(2, 1fr);
+    /* Las filas se generarán automáticamente con 50vh cada una */
+    grid-auto-rows: 60vh;
+    gap: 20px;
+    
+    /* Ocupa toda la pantalla de alto para que solo se vean 2 filas a la vez */
+    height: 100vh;
+    /* Activa el scroll vertical si hay más de 4 tarjetas */
+    overflow-y: auto;
+    
+    /* Opcional: un poco de padding y box-sizing para estética */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos de cada tarjeta */
+  .game-card {
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: white;
+    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  /* Imagen dentro de la tarjeta */
+  .game-card img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  /* Título y texto */
+  .game-card h2 {
+    margin-top: 10px;
+  }
+  
+  .game-card p {
+    margin: 5px 0;
+  }
+  
