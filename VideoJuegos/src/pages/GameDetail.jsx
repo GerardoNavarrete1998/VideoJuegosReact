@@ -1,26 +1,34 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Importamos useNavigate
 import { fetchGameDetails } from "../services/api";
 import "../styles/index.css";
 
 const GameDetail = () => {
     const { id } = useParams();
-    const [game, setGame] = useState(null);
+    const [info, setInfo] = useState(null);
+    const navigate = useNavigate(); // Hook para navegar
 
     useEffect(() => {
-        fetchGameDetails(id).then(setGame);
+        fetchGameDetails(id).then(setInfo);
     }, [id]);
 
-    if (!game) return <p>Cargando...</p>;
+    if (!info) return <p className="text-center text-lg mt-10">Cargando...</p>;
 
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold">{game.name}</h1>
-            <img src={game.background_image} alt={game.name} className="w-full h-64 object-cover rounded-md" />
-            <p>Géneros: {game.genres.map(g => g.name).join(", ")}</p>
-            <p>Puntuación: {game.metacritic}</p>
-            <p>Plataformas: {game.platforms.map(p => p.platform.name).join(", ")}</p>
-            <p>Año de lanzamiento: {game.released}</p>
+        <div className="info-container">
+            <div className="info-card">
+                <img src={info.background_image} alt={info.name} className="info-image" />
+                <h1 className="info-title">{info.name}</h1>
+                <p className="info-text"><strong>Géneros:</strong> {info.genres.map(g => g.name).join(", ")}</p>
+                <p className="info-score">⭐ {info.metacritic || "No disponible"}</p>
+                <p className="info-text"><strong>Plataformas:</strong> {info.platforms.map(p => p.platform.name).join(", ")}</p>
+                <p className="info-text"><strong>Año de lanzamiento:</strong> {info.released}</p>
+
+                {/* Botón para volver al Home */}
+                <button className="info-button" onClick={() => navigate("/")}>
+                    🏠 Volver al Home
+                </button>
+            </div>
         </div>
     );
 };

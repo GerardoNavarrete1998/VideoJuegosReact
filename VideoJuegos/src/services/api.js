@@ -3,58 +3,43 @@ import axios from "axios";
 const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 const BASE_URL = "https://api.rawg.io/api";
 
-export const fetchGames = async (searchQuery = "", filters = {}) => {
-  let url = `${BASE_URL}/games?key=${API_KEY}&ordering=-metacritic`;
+// Número total de juegos que queremos en el sitio (400) y juegos por página (40)
+const TOTAL_GAMES = 400;
+const PAGE_SIZE = 40;
+const TOTAL_PAGES = TOTAL_GAMES / PAGE_SIZE;
 
-  // Parámetro de búsqueda
-  if (searchQuery) {
-    url += `&search=${encodeURIComponent(searchQuery)}`;
+/**
+ * Obtiene una lista de juegos, limitando a 400 en total con 40 por página.
+ */
+export const fetchGames = async (searchQuery = "", filters = {}, page = 1) => {
+  if (page > TOTAL_PAGES) {
+    return { games: [], totalPages: TOTAL_PAGES };
   }
 
-  // Filtro por año (usando fechas)
-  if (filters.year) {
-    url += `&dates=${filters.year}-01-01,${filters.year}-12-31`;
-  }
+  let url = `${BASE_URL}/games?key=${API_KEY}&ordering=-metacritic&page_size=${PAGE_SIZE}&page=${page}`;
 
-  // Filtro por género
-  if (filters.genre) {
-    url += `&genres=${encodeURIComponent(filters.genre)}`;
-  }
-
-  // Filtro por plataformas
-  if (filters.platforms && filters.platforms !== "") {
-    url += `&platforms=${filters.platforms}`; 
-  }
-
-  // Filtro por tags
-  if (filters.tags) {
-    url += `&tags=${encodeURIComponent(filters.tags)}`;
-  }
-
-  // Filtro por desarrollador
-  if (filters.developer) {
-    url += `&developers=${encodeURIComponent(filters.developer)}`;
-  }
+  if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
+  if (filters.year) url += `&dates=${filters.year}-01-01,${filters.year}-12-31`;
+  if (filters.genre) url += `&genres=${encodeURIComponent(filters.genre)}`;
+  if (filters.platforms) url += `&platforms=${filters.platforms}`;
+  if (filters.tags) url += `&tags=${encodeURIComponent(filters.tags)}`;
+  if (filters.developer) url += `&developers=${encodeURIComponent(filters.developer)}`;
 
   try {
     const response = await axios.get(url);
-    const data = response.data.results || [];
-
-    // Filtrado local: para refinar la búsqueda si se ingresa un término
-    if (searchQuery) {
-      const searchLower = searchQuery.toLowerCase();
-      return data.filter((game) =>
-        game.name && game.name.toLowerCase().includes(searchLower)
-      );
-    }
-
-    return data;
+    return {
+      games: response.data.results || [],
+      totalPages: TOTAL_PAGES,
+    };
   } catch (error) {
     console.error("Error al obtener la lista de juegos:", error);
-    return [];
+    return { games: [], totalPages: TOTAL_PAGES };
   }
 };
 
+/**
+ * Obtiene los detalles de un juego por ID.
+ */
 export const fetchGameDetails = async (id) => {
   try {
     const url = `${BASE_URL}/games/${id}?key=${API_KEY}`;

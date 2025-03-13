@@ -1,6 +1,7 @@
 const Filters = ({ onFilter }) => {
   return (
-    <div className="flex flex-wrap gap-4 justify-center">
+    <div id="filtersSection">
+      <div className="flex flex-wrap gap-4 justify-center">
       {/* Filtro por Año */}
       <input 
         type="number" 
@@ -48,6 +49,7 @@ const Filters = ({ onFilter }) => {
         className="p-2 border rounded"
         onChange={(e) => onFilter("developer", e.target.value)}
       />
+    </div>
     </div>
   );
 };
