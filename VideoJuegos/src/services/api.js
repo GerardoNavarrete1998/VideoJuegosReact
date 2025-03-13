@@ -22,8 +22,8 @@ export const fetchGames = async (searchQuery = "", filters = {}) => {
   }
 
   // Filtro por plataformas
-  if (filters.platforms) {
-    url += `&platforms=${encodeURIComponent(filters.platforms)}`;
+  if (filters.platforms && filters.platforms !== "") {
+    url += `&platforms=${filters.platforms}`; 
   }
 
   // Filtro por tags
