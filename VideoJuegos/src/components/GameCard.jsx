@@ -6,7 +6,7 @@ const GameCard = ({ game }) => {
   const handleClick = () => {
     navigate(`/game/${game.id}`);
   };
-
+    //Juegos recibido por la api y mostrado en HOME con forma de cards
   return (
     <div className="game-card" onClick={handleClick}>
       <img src={game.background_image} alt={game.name} />

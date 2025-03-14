@@ -1,4 +1,6 @@
 const Filters = ({ onFilter }) => {
+
+    //Filtros para el sitio web en HOME
   return (
     <div id="filtersSection">
       <div className="flex flex-wrap gap-4 justify-center">

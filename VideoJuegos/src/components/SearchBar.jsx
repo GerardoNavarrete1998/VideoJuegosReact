@@ -1,4 +1,5 @@
 const SearchBar = ({ onSearch }) => {
+  //Barra de busqueda en el sitio web
     return (
       <input 
         type="text" 

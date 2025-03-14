@@ -16,6 +16,11 @@ const Home = () => {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("darkMode") === "true"
   );
+    // Aplicar modo oscuro
+    useEffect(() => {
+      document.body.classList.toggle("dark-mode", darkMode);
+      localStorage.setItem("darkMode", darkMode);
+    }, [darkMode]);
 
   // Cargar juegos según los filtros y búsqueda
   useEffect(() => {
@@ -24,19 +29,13 @@ const Home = () => {
     });
   }, [search, filters, currentPage]);
 
-  // Auto-scroll a la sección de filtros
+  // Auto-scroll a la sección de filtros cuando cambiar de pagina
   useEffect(() => {
     const filtersSection = document.getElementById("filtersSection");
     if (filtersSection) {
       filtersSection.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentPage]);
-
-  // Aplicar modo oscuro
-  useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
-    localStorage.setItem("darkMode", darkMode);
-  }, [darkMode]);
 
   return (
     <div className={`main-container ${darkMode ? "dark-mode" : ""}`}>

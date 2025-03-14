@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Importamos useNavigate
+import { useParams, useNavigate } from "react-router-dom"; 
 import { fetchGameDetails } from "../services/api";
 import "../styles/index.css";
 
 const GameDetail = () => {
     const { id } = useParams();
     const [info, setInfo] = useState(null);
-    const navigate = useNavigate(); // Hook para navegar
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         fetchGameDetails(id).then(setInfo);
     }, [id]);
 
     if (!info) return <p className="text-center text-lg mt-10">Cargando...</p>;
-
+    
+    //GameDetail del juego seleccionado
     return (
         <div className="info-container">
             <div className="info-card">
