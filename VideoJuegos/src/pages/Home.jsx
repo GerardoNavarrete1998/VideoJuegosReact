@@ -64,6 +64,33 @@ const Home = () => {
         <Filters onFilter={(key, value) => setFilters(prev => ({ ...prev, [key]: value }))} />
       </div>
 
+       {/* Paginación */}
+       <div className="pagination">
+        <button 
+          onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))} 
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </button>
+
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+          <button 
+            key={page} 
+            onClick={() => setCurrentPage(page)} 
+            className={currentPage === page ? "active" : ""}
+          >
+            {page}
+          </button>
+        ))}
+
+        <button 
+          onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages))}
+          disabled={currentPage >= totalPages}
+        >
+          Siguiente
+        </button>
+      </div>
+
       {/* Contenedor de juegos */}
       <div className="grid-container">
         {games.map(game => (
