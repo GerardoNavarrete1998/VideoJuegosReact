@@ -12,12 +12,19 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(10); // Máximo 10 páginas
 
+  // Estado del modo oscuro
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+
+  // Cargar juegos según los filtros y búsqueda
   useEffect(() => {
     fetchGames(search, filters, currentPage).then(({ games }) => {
       setGames(games);
     });
   }, [search, filters, currentPage]);
 
+  // Auto-scroll a la sección de filtros
   useEffect(() => {
     const filtersSection = document.getElementById("filtersSection");
     if (filtersSection) {
@@ -25,20 +32,39 @@ const Home = () => {
     }
   }, [currentPage]);
 
+  // Aplicar modo oscuro
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", darkMode);
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
   return (
-    <div className="main-container">
+    <div className={`main-container ${darkMode ? "dark-mode" : ""}`}>
       <header className="header">
         <h1>Catálogo de Videojuegos</h1>
+
+        {/* Switch de Modo Oscuro */}
+        <div className="dark-mode-toggle">
+          <span>🌙 Modo Oscuro</span>
+          <label className="switch">
+            <input 
+              type="checkbox" 
+              checked={darkMode} 
+              onChange={() => setDarkMode(!darkMode)}
+            />
+            <span className="slider round"></span>
+          </label>
+        </div>
       </header>
       
       <SearchBar onSearch={setSearch} />
       
-      {/* Sección de filtros con ID */}
+      {/* Sección de filtros */}
       <div id="filtersSection" className="filters-container">
         <Filters onFilter={(key, value) => setFilters(prev => ({ ...prev, [key]: value }))} />
       </div>
 
-      {/* Contenedor de juegos sin overflow para evitar doble scroll */}
+      {/* Contenedor de juegos */}
       <div className="grid-container">
         {games.map(game => (
           <GameCard key={game.id} game={game} />
@@ -76,4 +102,3 @@ const Home = () => {
 };
 
 export default Home;
-  

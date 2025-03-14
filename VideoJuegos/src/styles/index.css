@@ -12,10 +12,10 @@ body {
   padding: 20px;
 }
 
-/* Header profesional */
+/* Header */
 .header {
   text-align: center;
-  padding: 20px 0;
+  padding: 15px 0;
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   margin-bottom: 20px;
@@ -23,7 +23,7 @@ body {
 
 .header h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2rem; /* Tamaño base */
   letter-spacing: 2px;
 }
 
@@ -46,25 +46,29 @@ body {
   outline: none;
 }
 
-/* Sección de filtros fija en la parte superior */
+/* Sección de filtros */
 #filtersSection {
-  position: relative; /* Cambiado de sticky a relative */
-  background: white;
-  z-index: 100;
+ 
   padding: 10px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
-/* Estilos para el contenedor de filtros */
+
 .filters-container input,
 .filters-container select {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin: 0 10px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: border-color 0.3s ease;
+  width: auto;
+  min-width: 120px;
+  margin-right: 20px;
 }
 
 .filters-container input:focus,
@@ -73,18 +77,16 @@ body {
   outline: none;
 }
 
-/* Contenedor que mostrará 4 columnas */
+/* Grid de tarjetas */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 60vh;
   gap: 20px;
-  height: auto; /* Se ajusta al contenido */
+  height: auto;
   padding: 20px;
   box-sizing: border-box;
 }
 
-/* Estilos de cada tarjeta */
+/* Tarjetas de juego */
 .game-card {
   border: 2px solid #333;
   border-radius: 8px;
@@ -96,9 +98,10 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Imagen dentro de la tarjeta */
 .game-card img {
   width: 100%;
   height: 200px;
@@ -106,7 +109,13 @@ body {
   border-radius: 5px;
 }
 
-/* Título y texto */
+/* Animación al pasar el mouse */
+.game-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
 .game-card h2 {
   margin-top: 10px;
 }
@@ -115,77 +124,12 @@ body {
   margin: 5px 0;
 }
 
-/* Contenedor principal */
-.info-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #1e1e1e;
-  color: white;
-  padding: 20px;
-}
-
-/* Tarjeta de información */
-.info-card {
-  max-width: 800px;
-  width: 90%;
-  background: #2c2c2c;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-  text-align: center;
-}
-
-/* Imagen del juego */
-.info-image {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-/* Títulos y texto */
-.info-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.info-text {
-  font-size: 1.1rem;
-  margin: 5px 0;
-}
-
-.info-score {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #facc15;
-}
-
-/* Botón para volver al Home */
-.info-button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-  background-color: #ff4757;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.info-button:hover {
-  background-color: #e84118;
-}
-
-/* Estilos de paginación */
+/* Paginación */
 .pagination {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 5px;
   margin-top: 20px;
 }
 
@@ -194,10 +138,11 @@ body {
   color: white;
   border: none;
   padding: 10px 15px;
-  margin: 5px;
   cursor: pointer;
   border-radius: 5px;
   transition: background 0.3s;
+  flex: 1 1 auto;
+  min-width: 45px;
 }
 
 .pagination button.active {
@@ -212,4 +157,388 @@ body {
 .pagination button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+/* Buscar Y filtros Movil */
+@media (max-width: 768px) {
+  .search-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    padding: 10px;
+  }
+
+  /* Estilos del buscador */
+  .search-bar input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+
+  /* Contenedor de filtros en columna */
+  .filters-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .filters-container select {
+    width: 95%;
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 8px;
+    margin-left: -15px;
+    margin-top: 10px;
+  }
+  .filters-container input {
+    width: 90%;
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 8px;
+    margin-left: -15px;
+    margin-top: 10px;
+  }
+
+  /* Ajuste de tarjetas de juegos */
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .game-card {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+
+/* ====== MEDIA QUERIES PARA ADAPTAR SEGÚN EL DISPOSITIVO ====== */
+
+/* Computadora (4 columnas) */
+@media screen and (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .header h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Tablet (2 columnas) */
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .header h1 {
+    font-size: 2rem;
+  }
+  .filters-container {
+    justify-content: center;
+  }
+}
+
+/* Celular (1 columna) */
+@media screen and (max-width: 767px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  .header h1 {
+    font-size: 1.5rem; /* Reduce el tamaño del título */
+  }
+  .filters-container input,
+  .filters-container select {
+    font-size: 0.85rem;
+    min-width: 100px;
+  }
+  .pagination {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+/* Estilos generales */
+.info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Mantiene la tarjeta centrada en toda la pantalla */
+  background: linear-gradient(to bottom right, #d3dbe8, #eef2f7); /* Fondo similar al de la imagen */
+  padding: 20px;
+}
+
+.info-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px; /* Tamaño máximo en PC */
+  width: 100%;
+}
+
+.info-image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.info-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.info-text {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.info-score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f4b400; /* Amarillo estrella */
+}
+
+.info-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px auto 0;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 1px solid #000;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background: #f4f4f4;
+}
+
+/* 🔵 Pantallas grandes (PC) */
+@media screen and (min-width: 1024px) {
+  .info-card {
+      max-width: 500px; /* Más grande en PC */
+      padding: 30px;
+  }
+
+  .info-title {
+      font-size: 2rem;
+  }
+
+  .info-text, .info-score {
+      font-size: 1.2rem;
+  }
+
+  .info-button {
+      font-size: 1.1rem;
+  }
+}
+
+/*  Tablets (768px a 1023px) */
+@media screen and (max-width: 1023px) {
+  .info-card {
+      max-width: 500px;
+      padding: 25px;
+  }
+
+  .info-title {
+      font-size: 1.6rem;
+  }
+
+  .info-text, .info-score {
+      font-size: 1rem;
+  }
+}
+
+/*  Móviles (hasta 767px) */
+@media screen and (max-width: 767px) {
+  .info-container {
+      padding: 10px;
+  }
+
+  .info-card {
+      width: 90%;
+      max-width: 400px;
+      padding: 15px;
+  }
+
+  .info-title {
+      font-size: 1.4rem;
+  }
+
+  .info-text, .info-score {
+      font-size: 0.9rem;
+  }
+
+  .info-button {
+      font-size: 0.9rem;
+      padding: 8px 12px;
+  }
+}
+/* 🌙 Modo Oscuro General */
+.dark-mode {
+  background: #121212;
+  color: #ffffff;
+}
+
+.dark-mode .info-container {
+  background: #121212;
+}
+
+.dark-mode .info-card {
+  background: #1e1e1e;
+  color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .info-button {
+  background: #333;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.dark-mode .info-button:hover {
+  background: #444;
+}
+
+/* 🌙 Switch de Modo Oscuro */
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Estilos del Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+/* Versión Redonda del Switch */
+.slider.round {
+  border-radius: 34px;
+}
+/* 🌙 Modo Oscuro en Home */
+.dark-mode .main-container {
+  background: #121212;
+}
+
+/* Estilos del Header */
+.dark-mode .header {
+  background: #1e1e1e;
+  color: #ffffff;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 2px solid #333;
+}
+
+/* Tarjetas de los juegos */
+.dark-mode .grid-container {
+  background: #121212;
+}
+
+.dark-mode .grid-container .game-card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Barra de búsqueda */
+.dark-mode input[type="text"] {
+  background: #1e1e1e;
+  color: white;
+  border: 1px solid #444;
+}
+
+.dark-mode input[type="text"]::placeholder {
+  color: #aaa;
+}
+
+/* Estilos de los filtros */
+.dark-mode .filters-container select,
+.dark-mode .filters-container input {
+  background: #1e1e1e;
+  color: white;
+  border: 1px solid #444;
+}
+
+.dark-mode .filters-container select:focus,
+.dark-mode .filters-container input:focus {
+  border-color: #4caf50;
+}
+
+/* Paginación */
+.dark-mode .pagination button {
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark-mode .pagination button.active {
+  background: #4caf50;
+  color: white;
+}
+
+/* Modo oscuro del botón de búsqueda */
+.dark-mode .search-button {
+  background: #4caf50;
+  color: white;
+  border: none;
+}
+
+.dark-mode .search-button:hover {
+  background: #388e3c;
 }
