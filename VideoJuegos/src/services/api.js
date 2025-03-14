@@ -18,7 +18,9 @@ export const fetchGames = async (searchQuery = "", filters = {}, page = 1) => {
 
   let url = `${BASE_URL}/games?key=${API_KEY}&ordering=-metacritic&page_size=${PAGE_SIZE}&page=${page}`;
 
-  if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
+  if (searchQuery) {
+    url += `&search=${encodeURIComponent(searchQuery)}&search_exact=true`; // 🔹 Búsqueda exacta
+  }
   if (filters.year) url += `&dates=${filters.year}-01-01,${filters.year}-12-31`;
   if (filters.genre) url += `&genres=${encodeURIComponent(filters.genre)}`;
   if (filters.platforms) url += `&platforms=${filters.platforms}`;
